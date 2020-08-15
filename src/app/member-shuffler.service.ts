@@ -38,7 +38,7 @@ export class MemberShufflerService {
 
       const nextTalkingMember = members.find(value => value.talkState === TalkState.Waiting);
 
-      const fubb: Member[] = members.map(value => {
+      members.map(value => {
         if (value === nextTalkingMember) {
           value.talkState = TalkState.Talking;
           return value;

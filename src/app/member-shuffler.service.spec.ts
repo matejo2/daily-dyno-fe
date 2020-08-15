@@ -89,4 +89,27 @@ describe('MemberShufflerService', () => {
     console.log('TalkState TEST:' + result[2].talkState.toString());
     expect(result).toEqual(expectedMembers);
   });
+
+  it('should not set a HasTalked State to Talking, and gets the first that is waiting', () => {
+    const startingMembers: Member[] =
+      [
+        {name: 'Jolanda', talkState: TalkState.Talking, id: 0},
+        {name: 'Noah', talkState: TalkState.HasTalked, id: 1},
+        {name: 'Sebastian', talkState: TalkState.Waiting, id: 2},
+        {name: 'Maxo', talkState: TalkState.Waiting, id: 3}
+      ];
+    const nextMember = 1;
+
+    const expectedMembers: Member[] =
+      [
+        {name: 'Jolanda', talkState: TalkState.HasTalked, id: 0},
+        {name: 'Noah', talkState: TalkState.HasTalked, id: 1},
+        {name: 'Sebastian', talkState: TalkState.Talking, id: 2},
+        {name: 'Maxo', talkState: TalkState.Waiting, id: 3}
+      ];
+
+    const result = service.getNextRound(startingMembers, nextMember);
+    console.log('TalkState TEST:' + result[2].talkState.toString());
+    expect(result).toEqual(expectedMembers);
+  });
 });
