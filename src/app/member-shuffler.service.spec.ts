@@ -112,4 +112,24 @@ describe('MemberShufflerService', () => {
     console.log('TalkState TEST:' + result[2].talkState.toString());
     expect(result).toEqual(expectedMembers);
   });
+
+  it('should restart when everyone has talked', () => {
+    const startingMembers: Member[] =
+      [
+        {name: 'Bo', talkState: TalkState.HasTalked, id: 1},
+        {name: 'Mi', talkState: TalkState.HasTalked, id: 2},
+        {name: 'Fl', talkState: TalkState.Talking, id: 3}
+      ];
+    const nextMember = 2;
+
+    const expectedMembers: Member[] =
+      [
+        {name: 'Bo', talkState: TalkState.Waiting, id: 1},
+        {name: 'Mi', talkState: TalkState.Waiting, id: 2},
+        {name: 'Fl', talkState: TalkState.Talking, id: 3},
+      ];
+
+    const result = service.getNextRound(startingMembers, nextMember);
+    expect(result).toEqual(expectedMembers);
+  });
 });

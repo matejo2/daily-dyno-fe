@@ -4,7 +4,7 @@ export interface Member {
   id: number;
 }
 
-export enum TalkState {
+export  enum TalkState {
   Waiting,
   Talking,
   HasTalked,

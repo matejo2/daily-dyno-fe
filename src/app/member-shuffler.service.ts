@@ -32,19 +32,22 @@ export class MemberShufflerService {
     const indexCurrentlySpeaking = members.findIndex(value => value.talkState === TalkState.Talking);
     members[indexCurrentlySpeaking].talkState = TalkState.HasTalked;
 
+    // see if everyone has already talked
+    const allHaveTalked = members.every(value => value.talkState === TalkState.HasTalked);
+    if (allHaveTalked) {
+      //  reset ever member to waiting
+      members.map(value => value.talkState = TalkState.Waiting);
+    }
+
 // just take the next member which state is Waiting
-    const waiting: TalkState = TalkState.Waiting;
-    if (members[nextActiveMember].talkState !== waiting) {
-
+    if (members[nextActiveMember].talkState !== TalkState.Waiting) {
       const nextTalkingMember = members.find(value => value.talkState === TalkState.Waiting);
-
       members.map(value => {
         if (value === nextTalkingMember) {
           value.talkState = TalkState.Talking;
           return value;
         }
       });
-
       return members;
     }
 // next member is waiting
