@@ -10,15 +10,13 @@ export class MemberShufflerService {
   }
 
   initializeMembers(): Member[] {
-    const members: Member[] =
-      [
-        {name: 'Jolanda', talkState: TalkState.Waiting, id: 1},
-        {name: 'Noah', talkState: TalkState.Waiting, id: 2},
-        {name: 'Sebastian', talkState: TalkState.Waiting, id: 3},
-        {name: 'Oli', talkState: TalkState.Waiting, id: 4},
-        {name: 'Markus', talkState: TalkState.Waiting, id: 5},
-      ];
-    return members;
+    return [
+      {name: 'Jo', talkState: TalkState.Waiting, id: 1},
+      {name: 'No', talkState: TalkState.Waiting, id: 2},
+      {name: 'Se', talkState: TalkState.Waiting, id: 3},
+      {name: 'Ol', talkState: TalkState.Waiting, id: 4},
+      {name: 'Ma', talkState: TalkState.Waiting, id: 5},
+    ];
   }
 
   getRandomNumber(x: number): number {
@@ -33,8 +31,7 @@ export class MemberShufflerService {
     members[indexCurrentlySpeaking].talkState = TalkState.HasTalked;
 
     // see if everyone has already talked
-    const allHaveTalked = members.every(value => value.talkState === TalkState.HasTalked);
-    if (allHaveTalked) {
+    if (members.every(value => value.talkState === TalkState.HasTalked)) {
       //  reset ever member to waiting
       members.map(value => value.talkState = TalkState.Waiting);
     }
