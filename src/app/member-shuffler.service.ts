@@ -10,6 +10,7 @@ export class MemberShufflerService {
   }
 
   initializeMembers(): Member[] {
+    // todo later make the names and count variable
     return [
       {name: 'Jo', talkState: TalkState.Waiting, id: 1},
       {name: 'No', talkState: TalkState.Waiting, id: 2},
